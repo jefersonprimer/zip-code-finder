@@ -1,34 +1,58 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { FiSearch } from 'react-icons/fi'
+
+import api from './services/api'
+
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [input, setInput] = useState('');
+  const [cep, setCep] = useState({});
+
+  async function handleSearch() {
+    if (input === '') {
+      alert("fill in some zip code");
+      return;
+    }
+
+    try {
+      const response = await api.get(`${input}/json`);
+      setCep(response.data);
+      setInput("");
+    }
+    catch (error) {
+      alert("zip code not found ");
+      setInput("");
+    }
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+    <div className='container'>
+      <h1 className='title'>Zip Finder</h1>
+
+      <div className='containerInput'>
+        <input 
+        type="text"
+        placeholder='Type your zip code...'
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        />
+        <button className='btnSearch' onClick={handleSearch}>
+          <FiSearch size={25} color='#FFFFFF'/>
         </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+
+      {Object.keys(cep).length > 0 && (
+        <main className="main">
+          <h2>ZIP CODE: {cep.cep}</h2>
+          <span>{cep.logradouro}</span>
+          <span>{cep.complemento}</span>
+          <span>{cep.bairro}</span>
+          <span>{cep.localidade} - {cep.uf}</span>
+        </main>
+      )}
+     
+    </div>
   )
 }
 
