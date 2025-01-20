@@ -5,7 +5,7 @@ Icons provided by the React Icons library.
 # zip code finder
 App React + Vite
 
-<img src="./zipcode.png">
+<img src="./public/zipcode.png">
 
 # How to using
 1. Type name the zip code
