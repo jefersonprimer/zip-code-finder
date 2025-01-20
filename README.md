@@ -1,6 +1,6 @@
-all icons are of react icons
-
-api https://viacep.com.br/ws/01310930/json/
+🚀 Features
+ZIP code search using the ViaCEP API.
+Icons provided by the React Icons library.
 
 # zip code finder
 App React + Vite
