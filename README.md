@@ -5,7 +5,7 @@ api https://viacep.com.br/ws/01310930/json/
 # zip code finder
 App React + Vite
 
-<img src="./public/zipcode.png">
+<img src="./zipcode.png">
 
 # How to using
 1. Type name the zip code
